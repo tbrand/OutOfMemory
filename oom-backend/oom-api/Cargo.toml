@@ -1,0 +1,26 @@
+[package]
+name = "oom-api"
+version = "0.1.0"
+authors = ["tbrand <taichiro0709@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+oom-db = { path = "../oom-db" }
+oom-model = { path = "../oom-model" }
+diesel = { version = "1.0.0", features = ["mysql", "chrono", "r2d2"] }
+futures = "0.1.23"
+r2d2 = "*"
+warp = "*"
+chrono = "*"
+serde = { version = "*", features = ["derive"] }
+serde_json = "*"
+serde_yaml = "*"
+serde_urlencoded = "*"
+failure = "*"
+log = "*"
+reqwest = "*"
+rand = "*"
+sha2 = "*"
+
+[dev-dependencies]
+rand = "*"

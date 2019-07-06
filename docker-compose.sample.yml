@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+  backend:
+    build: oom-backend
+    depends_on:
+      - migration
+    environment:
+      RUST_LOG: oom=DEBUG
+      DATABASE_URL: "mysql://root:toor@mysql/oom"
+    volumes:
+      # FIXME
+      # The below assumes config.yaml exists at ./path-to/your/config/config.yaml
+      - ./path_to/your/config:/var/lib/oom
+    command: sh -c "sleep 40 && oom-backend -c /var/lib/oom/config.yaml"
+    ports:
+      - "8081:8081"
+  frontend:
+    build:
+      context: oom-frontend
+      args:
+        buildmode: "docker-compose"
+    depends_on:
+      - backend
+    ports:
+      - "8080:8080"
+  migration:
+    build:
+      context: oom-backend
+      dockerfile: Dockerfile.db
+    depends_on:
+      - mysql
+    environment:
+      RUST_LOG: INFO
+      DATABASE_URL: "mysql://root:toor@mysql/oom"
+    command: sh -c "sleep 30 && diesel migration run --migration-dir=/app/var/migrations"
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_DATABASE: oom
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      TZ: "Asia/Tokyo"
+    volumes:
+      - ./mysql/mnt:/var/lib/mysql
+      - ./mysql/conf.d:/etc/mysql/conf.d
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    restart: unless-stopped
+    ports:
+      - "3306:3306"

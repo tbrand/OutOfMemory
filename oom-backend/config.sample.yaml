@@ -1,0 +1,10 @@
+#
+# Create an OAuth ppp on GitHub at here.
+# https://github.com/settings/developers
+#
+github:
+  client_id: "<REPLACE>"
+  client_secret: "<REPLACE>"
+  oauth_access_token: "https://github.com/login/oauth/access_token"
+  oauth_authorize: "https://github.com/login/oauth/authorize"
+  api_endpoint: "https://api.github.com"

@@ -1,0 +1,18 @@
+[package]
+name = "oom-db"
+version = "0.1.0"
+authors = ["tbrand <taichiro0709@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+oom-model = { path = "../oom-model" }
+oom-schema = { path = "../oom-schema" }
+diesel = { version = "1.0.0", features = ["mysql", "chrono", "r2d2"] }
+r2d2 = "*"
+chrono = "*"
+failure = "*"
+log = "*"
+
+[dev-dependencies]
+lazy_static = "*"
+rand = "*"

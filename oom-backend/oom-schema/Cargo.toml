@@ -1,0 +1,8 @@
+[package]
+name = "oom-schema"
+version = "0.1.0"
+authors = ["tbrand <taichiro0709@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+diesel = { version = "1.0.0", features = ["chrono"] }

@@ -1,0 +1,23 @@
+[package]
+name = "oom-backend"
+version = "0.1.0"
+authors = ["tbrand <taichiro0709@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+oom-api = { path = "oom-api" }
+oom-model = { path = "oom-model" }
+oom-db = { path = "oom-db" }
+oom-schema = { path = "oom-schema" }
+failure = "*"
+log = "*"
+pretty_env_logger = "*"
+clap = "*"
+
+[workspace]
+members = [
+  "oom-api",
+  "oom-model",
+  "oom-db",
+  "oom-schema",
+]

@@ -1,0 +1,22 @@
+FROM rust:latest as builder
+
+WORKDIR /app
+
+RUN cargo install diesel_cli --no-default-features --features mysql
+
+FROM debian:stretch as runner
+
+WORKDIR /app
+
+RUN apt-get update -y && apt-get install default-libmysqlclient-dev -y
+RUN mkdir /app/bin
+RUN mkdir /app/var
+ENV PATH $PATH:/app/bin
+
+COPY migrations /app/var/migrations
+
+COPY --from=builder \
+  /usr/local/cargo/bin/diesel \
+  /app/bin/diesel
+
+CMD ["diesel", "migration", "--migration-dir=/app/var/migrations"]
