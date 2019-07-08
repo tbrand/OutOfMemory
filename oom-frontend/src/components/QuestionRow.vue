@@ -125,11 +125,11 @@
     width: 44px;
     color: #6a737c;
     padding-top: 5px;
+  }
 
-    .solved {
-      border: 1px solid #409EFF;
-      border-radius: 4px;
-    }
+  .question-num-col.solved {
+    border: 1px solid #409EFF;
+    border-radius: 4px;
   }
 
   .question-num-col-num {
